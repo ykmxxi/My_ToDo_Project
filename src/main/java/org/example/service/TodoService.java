@@ -32,7 +32,7 @@ public class TodoService {
     }
 
     public List<TodoEntity> searchAll() {
-        return null;
+        return this.todoRepository.findAll();
     }
 
     public TodoEntity updateById(Long id) {
