@@ -56,6 +56,6 @@ public class TodoService {
     }
 
     public void deleteAll() {
-
+        this.todoRepository.deleteAll();
     }
 }
