@@ -16,7 +16,12 @@ public class TodoService {
     private final TodoRepository todoRepository;
 
     public TodoEntity add(TodoRequest request) {
-        return null;
+        TodoEntity todoEntity = new TodoEntity();
+        todoEntity.setTitle(request.getTitle());
+        todoEntity.setOrder(request.getOrder());
+        todoEntity.setCompleted(request.getCompleted());
+
+        return this.todoRepository.save(todoEntity);
     }
 
     public TodoEntity searchById(Long id) {
