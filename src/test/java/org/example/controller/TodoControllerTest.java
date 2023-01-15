@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.model.TodoModel;
+import org.example.model.TodoItem;
 import org.example.model.TodoRequest;
 import org.example.service.TodoService;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,11 +35,11 @@ public class TodoControllerTest {
     @MockBean
     private TodoService todoService;
 
-    private TodoModel expected;
+    private TodoItem expected;
 
     @BeforeEach
     void setup() {
-        this.expected = new TodoModel();
+        this.expected = new TodoItem();
         this.expected.setId(123L);
         this.expected.setTitle("test");
         this.expected.setOrder(0L);
@@ -51,7 +51,7 @@ public class TodoControllerTest {
         when(this.todoService.add(any(TodoRequest.class)))
                 .then((i) -> {
                     TodoRequest request = i.getArgument(0, TodoRequest.class);
-                    return new TodoModel(this.expected.getId(), request.getTitle(), request.getOrder(),
+                    return new TodoItem(this.expected.getId(), request.getTitle(), request.getOrder(),
                             request.getCompleted());
                 });
 
@@ -94,10 +94,10 @@ public class TodoControllerTest {
 
     @Test
     void readAll() throws Exception {
-        List<TodoModel> mockList = new ArrayList<>();
+        List<TodoItem> mockList = new ArrayList<>();
         int expectedLength = 10;
         for (int i = 0; i < expectedLength; i++) {
-            mockList.add(mock(TodoModel.class));
+            mockList.add(mock(TodoItem.class));
         }
 
         given(todoService.searchAll()).willReturn(mockList);

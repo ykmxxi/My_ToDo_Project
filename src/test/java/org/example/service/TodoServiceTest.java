@@ -10,7 +10,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
-import org.example.model.TodoModel;
+import org.example.model.TodoItem;
 import org.example.model.TodoRequest;
 import org.example.repository.TodoRepository;
 import org.junit.jupiter.api.Test;
@@ -32,33 +32,33 @@ class TodoServiceTest {
 
     @Test
     void add() {
-        when(this.todoRepository.save(any(TodoModel.class)))
+        when(this.todoRepository.save(any(TodoItem.class)))
                 .then(AdditionalAnswers.returnsFirstArg());
 
         TodoRequest expected = new TodoRequest();
         expected.setTitle("Test Title");
 
-        TodoModel actual = this.todoService.add(expected);
+        TodoItem actual = this.todoService.add(expected);
 
         assertEquals(expected.getTitle(), actual.getTitle());
     }
 
     @Test
     void searchById() {
-        TodoModel entity = new TodoModel();
+        TodoItem entity = new TodoItem();
         entity.setId(123L);
         entity.setTitle("TEST");
         entity.setOrder(0L);
         entity.setCompleted(false);
 
-        Optional<TodoModel> optionalTodoEntity = Optional.of(entity);
+        Optional<TodoItem> optionalTodoEntity = Optional.of(entity);
 
         given(this.todoRepository.findById(anyLong()))
                 .willReturn(optionalTodoEntity);
 
-        TodoModel actual = this.todoService.searchById(123L);
+        TodoItem actual = this.todoService.searchById(123L);
 
-        TodoModel expected = optionalTodoEntity.get();
+        TodoItem expected = optionalTodoEntity.get();
 
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getTitle(), actual.getTitle());

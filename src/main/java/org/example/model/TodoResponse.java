@@ -15,11 +15,11 @@ public class TodoResponse {
     private Boolean completed;
     private String url;
 
-    public TodoResponse(TodoModel todoModel) {
-        this.id = todoModel.getId();
-        this.title = todoModel.getTitle();
-        this.order = todoModel.getOrder();
-        this.completed = todoModel.getCompleted();
+    public TodoResponse(TodoItem todoItem) {
+        this.id = todoItem.getId();
+        this.title = todoItem.getTitle();
+        this.order = todoItem.getOrder();
+        this.completed = todoItem.getCompleted();
 
         this.url = "http://localhost:8080/" + this.id;
     }
